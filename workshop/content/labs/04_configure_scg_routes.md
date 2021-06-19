@@ -20,8 +20,13 @@ To add an API route to a Spring Cloud Gateway for Kubernetes instance, you must 
 <br/>
 
 
-1. Inspect the file `demo/route-config.yml` it contains gateway configuration CRD that proxies requests
+1. Inspect the file `demo/route-config.yaml` it contains gateway configuration CRD that proxies requests
 set the gateway to github. Notice that this route configuration is generic.  
+
+
+```execute
+cat demo/route-config.yaml
+```
 
 ```yaml
 apiVersion: "tanzu.vmware.com/v1"
@@ -37,10 +42,18 @@ spec:
         - StripPrefix=1
 ```
 
-2. run the command `kubectl apply -f demo/route-config.yml` you 
+2. run the command `kubectl apply -f demo/route-config.yaml` you 
 
-3. Inspect the file `demo/mapping.yml` notice that it points at the gateway instance we already deployed
-at the configuration defined in `route-config.yml`
+```execute
+kubectl apply -f  demo/route-config.yaml
+```
+
+3. Inspect the file `demo/mapping.yaml` notice that it points at the gateway instance we already deployed
+at the configuration defined in `route-config.yaml`
+
+```execute
+cat demo/mapping.yaml
+```
 
 ```yaml
 apiVersion: "tanzu.vmware.com/v1"
@@ -54,36 +67,96 @@ spec:
     name: my-gateway-routes
 ```
 
-4. run the command `kubectl apply -f demo/mapping.yml` this will configure the already deployed 
+4. run the command `kubectl apply -f demo/mapping.yaml` this will configure the already deployed 
    instance to pass proxy requests to github.com 
-   
-After creating the mapping and route config resources, you should be able to access the myapp app at the fully qualified domain name (FQDN) used by the Gateway instance and the path /api/*. For example, if your Gateway instance is exposed by an Ingress resource at the domain gateway.example.com, you can access the myapp app at the following URL:
-
-https://gateway.example.com/api/my-path
-
-
-5. We don't have a load balancer configured with our kind cluster, so we will use port forwarding to
-   test the gateway. run the command `kubectl port-forward service/my-gateway 8080:80` you will see 
-   output like
-```text
-Forwarding from 127.0.0.1:8080 -> 8080
-Forwarding from [::1]:8080 -> 8080
-```
-
-6. Using a browser go to `http://localhost:8080` you should see the github site. The request are 
-   going to spring cloud gateway which is then sending them to github.com. Congrats you have 
-   managed to deploy a spring cloud gateway instance using a CRD. There are many more things
-   that you can do with spring cloud gateway that we will discuss in the rest of the workshop this is 
-   just the start. 
-
-
-Now you can deploy the `helloworld` application in workshop namespace. To create deployment first change to the `~/demo` sub directory.
-
 
 ```execute
-kubectl create -f helloworld-deployment.yaml
+kubectl apply -f  demo/mapping.yaml
+```
+   
+After creating the mapping and route config resources, you should be able to access the app at the fully qualified domain name (FQDN) used by the Gateway instance and the path /api/*. For example, if your Gateway instance is exposed by an Ingress resource at the domain gateway.example.com, you can access the app at the following URL:
+
+
+https://my-gateway-{{ SESSION_NAMESPACE }}.workshop.frankcarta.com/github
+
+
+5. Using a browser go to gateway url you should see the github site. The request are 
+   going to spring cloud gateway which is then sending them to github.com. 
+   
+Congrats you have managed to deploy a spring cloud gateway instance using a CRD. There are many more things that you can do with spring cloud gateway that we will discuss in the rest of the workshop this is just the start. 
+
+
+
+## Add API Routes to Gateway
+
+
+1. Now deploy the `helloworld` application in workshop namespace. 
+
+```execute
+kubectl apply -f demo/helloworld-deployment.yaml
+kubectl apply -f demo/helloworld-service.yaml
 ```
 
-output:
+Now that the helloworld application is running as a service named helloworld you can describe the route configuration to be applied to my-gateway.
 
-deployment.apps/helloworld created
+2. Define SpringCloudGatewayRouteConfig with the following definition:
+
+  ```
+  apiVersion: "tanzu.vmware.com/v1"
+  kind: SpringCloudGatewayRouteConfig
+  metadata:
+    name: helloworld-route-config
+  spec:
+    service:
+      name: helloworld
+    routes:
+      - predicates:
+          - Path=/api/**
+        filters:
+          - StripPrefix=1
+  ```
+
+```execute
+cat demo/hellowworld-route-config.yaml
+```
+
+3. Define SpringCloudGatewayMapping with the following definition:
+
+```
+apiVersion: "tanzu.vmware.com/v1"
+kind: SpringCloudGatewayMapping
+metadata:
+  name: helloworld-gateway-mapping
+spec:
+  gatewayRef:
+    name: my-gateway
+  routeConfigRef:
+    name: helloworld-gateway-route-config
+```
+
+```execute
+cat demo/helloworld-gateway-mapping.yaml
+```
+
+4. Apply both the definitions to your Kubernetes cluster.
+
+The SpringCloudGatewayMapping and SpringCloudGatewayRouteConfig object kinds are processed by the Spring Cloud Gateway for Kubernetes management components to update the desired Gateway instance provided in the spec.gateway property value. The application to route traffic for the configured routes is supplied in the spec.service property value. 
+
+Run the following command to apply SpringCloudGatewayMapping and SpringCloudGatewayRouteConfig it into Kubernetes cluster.
+
+```execute
+$ kubectl apply -f demo/hellowworld-route-config.yaml
+$ kubectl apply -f demo/helloworld-gateway-mapping.yaml
+```
+
+my-gateway had an ingress applied already for FQDN of my-gateway.spring.animalrescue.online, the Animal Rescue backend API will be available under the path my-gateway.spring.animalrescue.online/api/.... One of the endpoints available in the sample application is GET /api/animals which lists all of the animals available for adoption requests. This endpoint should now be accessible using the following command.
+
+https://my-gateway-{{ SESSION_NAMESPACE }}.workshop.frankcarta.com/api/
+
+### Lets access service via gateway 
+
+```execute
+curl -L -X POST "http://my-gateway-{{ SESSION_NAMESPACE }}.workshop.frankcarta.com/api/messages" -H 'Content-Type: application/json' -d '{ "sender": "world1" }'
+```
+
+{"id":"5e2efa73-ed9f-4e83-884b-4a717aa5c584","sender":"world1","message":"Hello world1 (direct)","host":null}

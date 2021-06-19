@@ -1,11 +1,12 @@
 apiVersion: "tanzu.vmware.com/v1"
 kind: SpringCloudGatewayRouteConfig
 metadata:
-  name: my-gateway-routes
+  name: helloworld-route-config
 spec:
+  service:
+    name: helloworld
   routes:
-    - uri: https://github.com
-      predicates:
-        - Path=/github/**
+    - predicates:
+        - Path=/api/**
       filters:
         - StripPrefix=1

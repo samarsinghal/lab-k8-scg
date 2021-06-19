@@ -93,10 +93,10 @@ my-gateway-default-ingress   <none>   my-gateway-default.workshop.frankcarta.com
 ## Configure for High Availability
 You can configure Spring Cloud Gateway for Kubernetes to run multiple instances in High Availability as you would do with a normal Kubernetes resource.
 
-While a Gateway is running you can use kubectl scale to modify the number of replicas. For example, given a Gateway that has 1 replica, the following will increase the number of replicas to 4.
+While a Gateway is running you can use kubectl scale to modify the number of replicas. For example, given a Gateway that has 1 replica, the following will increase the number of replicas to 2.
 
 ```execute
-kubectl scale scg my-gateway --replicas=4
+kubectl scale scg my-gateway --replicas=2
 ```
 
 In initial configuration, you can specify the number of replicas using the spec.count parameter. The following example configures a replica count of 3.
@@ -119,19 +119,21 @@ kubectl get pods
 ## Configure Cross-Origin Resource Sharing (CORS)
 You can define a global CORS behavior that will be applied to all route configurations mapped to it.
 
-apiVersion: "tanzu.vmware.com/v1"
-kind: SpringCloudGateway
-metadata:
-  name: my-gateway
-spec:
-  api:
-    cors:
-      allowedOrigins:
-        - "https://foo.example.com"
-      allowedMethods:
-        - "GET"
-        - "PUT"
-        - "POST"
+```
+  apiVersion: "tanzu.vmware.com/v1"
+  kind: SpringCloudGateway
+  metadata:
+    name: my-gateway
+  spec:
+    api:
+      cors:
+        allowedOrigins:
+          - "https://foo.example.com"
+        allowedMethods:
+          - "GET"
+          - "PUT"
+          - "POST"
+```
 
 The following parameters can be configured in the spec.api.cors block:
 
@@ -146,14 +148,17 @@ The following parameters can be configured in the spec.api.cors block:
 
 If you need to be able to discard inactive sessions after a certain time (e.g 10 minutes), just add the inactive-session-expiration-in-minutes configuration.
 
-apiVersion: "tanzu.vmware.com/v1"
-kind: SpringCloudGateway
-metadata:
-  name: my-gateway
-spec:
-  sso:
-    secret: my-sso-credentials
-    inactive-session-expiration-in-minutes: 10
+```
+  apiVersion: "tanzu.vmware.com/v1"
+  kind: SpringCloudGateway
+  metadata:
+    name: my-gateway
+  spec:
+    sso:
+      secret: my-sso-credentials
+      inactive-session-expiration-in-minutes: 10
+```
+
 
 This does not modify any authorization server token expiration (or ttl) configuration. It only affects the session information managed inside the gateway.
 
@@ -172,15 +177,17 @@ CPU	      500m	      2
 
 But you can change it as seen in the example below. Note that less than the required may cause issues and is not recommended.
 
-apiVersion: "tanzu.vmware.com/v1"
-kind: SpringCloudGateway
-metadata:
-  name: my-gateway
-spec:
-  resources:
-    requests:
-      memory: "512Mi"
-      cpu: "1"
-    limits:
-      memory: "1Gi"
-      cpu: "2"
+```
+  apiVersion: "tanzu.vmware.com/v1"
+  kind: SpringCloudGateway
+  metadata:
+    name: my-gateway
+  spec:
+    resources:
+      requests:
+        memory: "512Mi"
+        cpu: "1"
+      limits:
+        memory: "1Gi"
+        cpu: "2"
+```

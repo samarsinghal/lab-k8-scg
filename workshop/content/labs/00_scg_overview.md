@@ -8,19 +8,8 @@ It provides an effective solution for routing diverse client requests to APIs an
 
 <br/>
 
-## Spring Cloud Gateway Editions
-
-
-<br/>
-
-<img src="../images/Tanzu Commercial Offerings.png" alt="Spring Cloud Gateway Editions" style="border:none;"/>
-
-<br/>
-<br/>
-
 ## How It Works
 
-<br/>
 <br/>
 
 • Routes define how the Gateway will process incoming requests
@@ -71,7 +60,18 @@ Clients make requests to Spring Cloud Gateway. If the Gateway Handler Mapping de
 
 <br/>
 
+## Spring Cloud Gateway Editions
+
+
+<br/>
+
+<img src="../images/Tanzu Commercial Offerings.png" alt="Spring Cloud Gateway Editions" style="border:none;"/>
+
+<br/>
+<br/>
+
 For more information about the open-source project, see its [documentation](https://cloud.spring.io/spring-cloud-gateway/reference/html/).
 
 
 <br/>
+
