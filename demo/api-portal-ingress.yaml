@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: contour
+  generation: 1
+  name: api-portal
+  namespace: api-portal
+spec:
+  rules:
+  - host: api-portal.workshop.frankcarta.com
+    http:
+      paths:
+      - backend:
+          serviceName: api-portal-server
+          servicePort: 8080
+        path: /
+        pathType: ImplementationSpecific
+status:
+  loadBalancer:
+    ingress:
+    - hostname: adcdb6a940f12471f9696606bad84e28-695493484.us-west-2.elb.amazonaws.com

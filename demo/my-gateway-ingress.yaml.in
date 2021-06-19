@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: contour
+  generation: 1
+  name: my-gateway-${SESSION_NAMESPACE}-ingress
+  namespace: ${SESSION_NAMESPACE}
+spec:
+  rules:
+  - host: my-gateway-${SESSION_NAMESPACE}.workshop.frankcarta.com
+    http:
+      paths:
+      - backend:
+          serviceName: my-gateway
+          servicePort: 80
+        path: /
+        pathType: ImplementationSpecific
+status:
+  loadBalancer:
+    ingress:
+    - hostname: adcdb6a940f12471f9696606bad84e28-695493484.us-west-2.elb.amazonaws.com
