@@ -3,22 +3,10 @@ name: Kubernetes Fundamentals
 modules:
     activate:
     - index
-    - labs/00_bosh_lab-connect
-    - labs/01_bosh_example-stemcell
-    - labs/02_bosh_inspect-cloud-config
-    - labs/03_bosh_examine-bosh-release
-    - labs/04_bosh_access-managed-instance
-    - labs/05_bosh_instance-internals
-    - labs/06_bosh_errands
-    - labs/07_bosh_tasks
-    - labs/08_tas_intro
-    - labs/09_tas_cfpushfailure
-    - labs/10_tas_app_connectivity
-    - labs/11_tas_slow_requests
-    - labs/12_cf-curl-api
-    - labs/13_tas_healthcheck
-    - labs/14_healthwatch
-    - labs/15_blue-green-deploy
-    - labs/16_tas_check_expired_certs
-    - labs/17_tas_cert_rotation 
+    - labs/00_scg_overview
+    - labs/01_scg_on_K8_overview
+    - labs/02_scg_operator
+    - labs/03_configure_scg_instance
+    - labs/04_configure_scg_routes
+    - labs/05_predicates_and_filters
     - finish

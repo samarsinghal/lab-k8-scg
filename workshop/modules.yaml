@@ -2,51 +2,26 @@ modules:
     index:
         name: Workshop Overview
         exit_sign: Start Workshop
-    labs/00_bosh_lab-connect:
-        name: Workshop Lab Connectivity        
-    labs/01_bosh_example-stemcell:
-        name: BOSH Stemcells Lab
-    labs/02_bosh_inspect-cloud-config:
-        name: Cloud Config Lab    
-    labs/03_bosh_examine-bosh-release:
-        name: BOSH Releases Lab
-    labs/04_bosh_access-managed-instance:
-        name: Access Managed Instances Lab
-    labs/05_bosh_instance-internals:
-        name: BOSH Instances Internals Lab 
-    labs/06_bosh_errands:
-        name: BOSH Errands Lab 
-    labs/07_bosh_tasks:
-        name: BOSH Tasks Lab 
-    labs/08_tas_intro: 
-        name: TAS Intro
-    labs/09_tas_cfpushfailure: 
-        name: CF Push Failure
-    labs/10_tas_app_connectivity:
-        name: App Connectivity
-    labs/11_tas_slow_requests:
-        name: Slow Requests
-    labs/12_cf-curl-api:
-        name: CF API Endpoints 
-    labs/13_tas_healthcheck:
-        name: Health Checks 
-    labs/14_healthwatch:
-        name: Healthwatch 
-    labs/15_blue-green-deploy:
-        name: Zero Downtime
-    labs/16_tas_check_expired_certs:
-        name: Check for Expired Certs
-    labs/17_tas_cert_rotation:
-        name: Rotate Certs
-
+    labs/00_scg_overview:
+        name: Open-source Spring Cloud Gateway Overview        
+    labs/01_scg_on_K8_overview:
+        name: Spring Cloud Gateway on K8 Overview
+    labs/02_scg_operator:
+        name: Spring Cloud Gateway Operator    
+    labs/03_configure_scg_instance:
+        name: Gateway Instance Configuration
+    labs/04_configure_scg_routes:
+        name: Route Configuration
+    labs/05_predicates_and_filters:
+        name: Filters/Predicates
     finish:
         name: Workshop Summary
         exit_sign: Finish Workshop
 config:
-    vars:
-    - name: LAB_SLOT_ID
-      value: 240
-    - name: LAB_DOMAIN
-      value: pez.pivotal.io
-    - name: LAB_CF_DEPLOYID
-      value: cf-a7b9ebc208b14dec252e      
+    # vars:
+    # - name: LAB_SLOT_ID
+    #   value: 240
+    # - name: LAB_DOMAIN
+    #   value: pez.pivotal.io
+    # - name: LAB_CF_DEPLOYID
+    #   value: cf-a7b9ebc208b14dec252e      
