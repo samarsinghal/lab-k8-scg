@@ -20,64 +20,64 @@ To add an API route to a Spring Cloud Gateway for Kubernetes instance, you must 
 <br/>
 
 
-1. Inspect the file `demo/route-config.yaml` it contains gateway configuration CRD that proxies requests
+1. Inspect the file `demo/github-route-config.yaml` it contains gateway configuration CRD that proxies requests
 set the gateway to github. Notice that this route configuration is generic.  
 
 
 ```execute
-cat demo/route-config.yaml
+cat demo/github-route-config.yaml
 ```
 
 ```yaml
 apiVersion: "tanzu.vmware.com/v1"
 kind: SpringCloudGatewayRouteConfig
 metadata:
-  name: my-gateway-routes
+  name: github-route-config
 spec:
   routes:
     - uri: https://github.com
       predicates:
-        - Path=/**
+        - Path=/github/**
       filters:
         - StripPrefix=1
 ```
 
-2. run the command `kubectl apply -f demo/route-config.yaml` you 
+2. run the command `kubectl apply -f demo/github-route-config.yaml` you 
 
 ```execute
-kubectl apply -f  demo/route-config.yaml
+kubectl apply -f  demo/github-route-config.yaml
 ```
 
-3. Inspect the file `demo/mapping.yaml` notice that it points at the gateway instance we already deployed
-at the configuration defined in `route-config.yaml`
+3. Inspect the file `demo/github-gateway-mapping.yaml` notice that it points at the gateway instance we already deployed
+at the configuration defined in `github-route-config.yaml`
 
 ```execute
-cat demo/mapping.yaml
+cat demo/github-gateway-mapping.yaml
 ```
 
 ```yaml
 apiVersion: "tanzu.vmware.com/v1"
 kind: SpringCloudGatewayMapping
 metadata:
-  name: test-gateway-mapping
+  name: github-gateway-mapping
 spec:
   gatewayRef:
     name: my-gateway
   routeConfigRef:
-    name: my-gateway-routes
+    name: github-route-config
 ```
 
-4. run the command `kubectl apply -f demo/mapping.yaml` this will configure the already deployed 
+4. run the command `kubectl apply -f demo/github-gateway-mapping.yaml` this will configure the already deployed 
    instance to pass proxy requests to github.com 
 
 ```execute
-kubectl apply -f  demo/mapping.yaml
+kubectl apply -f demo/github-gateway-mapping.yaml
 ```
    
 After creating the mapping and route config resources, you should be able to access the app at the fully qualified domain name (FQDN) used by the Gateway instance and the path /api/*. For example, if your Gateway instance is exposed by an Ingress resource at the domain gateway.example.com, you can access the app at the following URL:
 
 
-https://my-gateway-{{ SESSION_NAMESPACE }}.workshop.frankcarta.com/github
+https://my-gateway-{{SESSION_NAMESPACE}}.workshop.frankcarta.com/github
 
 
 5. Using a browser go to gateway url you should see the github site. The request are 
@@ -111,7 +111,7 @@ Now that the helloworld application is running as a service named helloworld you
       name: helloworld
     routes:
       - predicates:
-          - Path=/api/**
+          - Path=/helloworld/**
         filters:
           - StripPrefix=1
   ```
@@ -131,7 +131,7 @@ spec:
   gatewayRef:
     name: my-gateway
   routeConfigRef:
-    name: helloworld-gateway-route-config
+    name: helloworld-route-config
 ```
 
 ```execute
@@ -149,14 +149,16 @@ $ kubectl apply -f demo/hellowworld-route-config.yaml
 $ kubectl apply -f demo/helloworld-gateway-mapping.yaml
 ```
 
-my-gateway had an ingress applied already for FQDN of my-gateway.spring.animalrescue.online, the Animal Rescue backend API will be available under the path my-gateway.spring.animalrescue.online/api/.... One of the endpoints available in the sample application is GET /api/animals which lists all of the animals available for adoption requests. This endpoint should now be accessible using the following command.
+my-gateway had an ingress applied already for FQDN of my-gateway-{{SESSION_NAMESPACE}}.workshop.frankcarta.com, the helloworld API will be available under the path my-gateway-{{SESSION_NAMESPACE}}.workshop.frankcarta.com/helloworld/.... One of the endpoints available in the sample application is POST /api/messages which lists the posted message. 
 
-https://my-gateway-{{ SESSION_NAMESPACE }}.workshop.frankcarta.com/api/
+EX:- https://my-gateway-{{SESSION_NAMESPACE}}.workshop.frankcarta.com/helloworld/api/messages
 
 ### Lets access service via gateway 
 
 ```execute
-curl -L -X POST "http://my-gateway-{{ SESSION_NAMESPACE }}.workshop.frankcarta.com/api/messages" -H 'Content-Type: application/json' -d '{ "sender": "world1" }'
+curl -L -X POST "http://my-gateway-{{SESSION_NAMESPACE}}.workshop.frankcarta.com/helloworld/api/messages" -H 'Content-Type: application/json' -d '{ "sender": "world1" }'
 ```
+
+Output:
 
 {"id":"5e2efa73-ed9f-4e83-884b-4a717aa5c584","sender":"world1","message":"Hello world1 (direct)","host":null}

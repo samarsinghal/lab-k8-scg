@@ -1,9 +1,9 @@
 apiVersion: "tanzu.vmware.com/v1"
 kind: SpringCloudGatewayMapping
 metadata:
-  name: helloworld-gateway-mapping
+  name: github-gateway-mapping
 spec:
   gatewayRef:
     name: my-gateway
   routeConfigRef:
-    name: helloworld-route-config
+    name: github-route-config

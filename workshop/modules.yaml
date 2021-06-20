@@ -14,6 +14,10 @@ modules:
         name: Route Configuration
     labs/05_predicates_and_filters:
         name: Filters/Predicates
+    labs/06_api_portal:
+        name: API Portal
+    labs/07_configure_api_portal:
+        name: Configure Api Portal
     finish:
         name: Workshop Summary
         exit_sign: Finish Workshop

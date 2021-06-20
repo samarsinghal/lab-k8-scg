@@ -1,7 +1,7 @@
 apiVersion: "tanzu.vmware.com/v1"
 kind: SpringCloudGatewayRouteConfig
 metadata:
-  name: my-gateway-routes
+  name: github-route-config
 spec:
   routes:
     - uri: https://github.com
@@ -9,3 +9,4 @@ spec:
         - Path=/github/**
       filters:
         - StripPrefix=1
+        - RateLimit=2,1m

@@ -9,4 +9,4 @@ spec:
     - predicates:
         - Path=/helloworld/**
       filters:
-        - StripPrefix=1
+        - CircuitBreaker=myCircuitBreaker,forward:/helloworld/api/inCaseOfFailureUseThis,500

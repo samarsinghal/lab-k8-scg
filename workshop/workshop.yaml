@@ -9,4 +9,6 @@ modules:
     - labs/03_configure_scg_instance
     - labs/04_configure_scg_routes
     - labs/05_predicates_and_filters
+    - labs/06_api-portal
+    - labs/07_configure-api-portal
     - finish

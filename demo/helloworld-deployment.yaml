@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: helloworld
-        image: remkohdev/helloworld
+        image: samarsinghal/helloworld
         ports:
         - containerPort: 8080
