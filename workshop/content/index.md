@@ -23,7 +23,6 @@ Introductions, Workshop, Logistics and Agenda Overview
 <br/>
 <br/>
 
-
 • Open-source Spring Cloud Gateway Overview
 
 • Spring Cloud Gateway on K8 Overview
@@ -36,17 +35,11 @@ Introductions, Workshop, Logistics and Agenda Overview
 
 • Filters/Predicates
 
-• Spring Cloud Gateway SSO Implementation  
-
-• Animal rescue App
-
 • API Portal 
 
-• API portal kubernetes Operation
+• Configure/On-Boarding API to API portal
 
-• Securing API portal
-
-• On-Boarding API to API portal
+• Animal rescue App
 
 <br/> 
 

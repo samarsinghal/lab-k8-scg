@@ -117,7 +117,7 @@ Now that the helloworld application is running as a service named helloworld you
   ```
 
 ```execute
-cat demo/hellowworld-route-config.yaml
+cat demo/helloworld-route-config.yaml
 ```
 
 3. Define SpringCloudGatewayMapping with the following definition:
@@ -145,17 +145,17 @@ The SpringCloudGatewayMapping and SpringCloudGatewayRouteConfig object kinds are
 Run the following command to apply SpringCloudGatewayMapping and SpringCloudGatewayRouteConfig it into Kubernetes cluster.
 
 ```execute
-$ kubectl apply -f demo/hellowworld-route-config.yaml
-$ kubectl apply -f demo/helloworld-gateway-mapping.yaml
+kubectl apply -f demo/helloworld-route-config.yaml
+kubectl apply -f demo/helloworld-gateway-mapping.yaml
 ```
 
 my-gateway had an ingress applied already for FQDN of my-gateway-$SESSION_NAMESPACE.workshop.frankcarta.com, the helloworld API will be available under the path my-gateway-$SESSION_NAMESPACE.workshop.frankcarta.com/helloworld/.... One of the endpoints available in the sample application is POST /api/messages which lists the posted message. 
 
-```execute
-echo https://my-gateway-$SESSION_NAMESPACE.workshop.frankcarta.com/helloworld/api/messages
-```
-
 ### Lets access service via gateway 
+
+```execute
+echo https://my-gateway-$SESSION_NAMESPACE.workshop.frankcarta.com/helloworld/api/Hello
+```
 
 ```execute
 curl -L -X POST "http://my-gateway-$SESSION_NAMESPACE.workshop.frankcarta.com/helloworld/api/messages" -H 'Content-Type: application/json' -d '{ "sender": "world1" }'

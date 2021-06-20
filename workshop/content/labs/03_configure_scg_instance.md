@@ -95,7 +95,7 @@ You can configure Spring Cloud Gateway for Kubernetes to run multiple instances 
 
 While a Gateway is running you can use kubectl scale to modify the number of replicas. For example, given a Gateway that has 1 replica, the following will increase the number of replicas to 2.
 
-```execute
+```
 kubectl scale scg my-gateway --replicas=2
 ```
 
