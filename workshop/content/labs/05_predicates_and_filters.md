@@ -56,13 +56,17 @@ kubectl apply -f demo/github-ratelimit-route-config.yaml
 
 Now access github gateway url miltiple times and validate ratelimit in action
 
-https://my-gateway-{{SESSION_NAMESPACE}}.workshop.frankcarta.com/github
+```execute
+echo https://my-gateway-$SESSION_NAMESPACE.workshop.frankcarta.com/github
+```
 
 ## Reroute traffic on error response: CircuitBreaker Filter
 
 HelloWorld application has an error endpoint that returns a 500 error. Let's try to invoke that endpoint and see what happens.
 
-https://my-gateway-{{SESSION_NAMESPACE}}.workshop.frankcarta.com/helloworld/api/returnFailure
+```execute
+echo https://my-gateway-$SESSION_NAMESPACE.workshop.frankcarta.com/helloworld/api/returnFailure
+```
 
 We will now use a gateway circuit breaker filter to redirect the server error to the default error page.
 
@@ -101,7 +105,9 @@ kubectl apply -f demo/helloworld-circuitbreaker-route-config.yaml
 
 Now access the error endpoint and validate the response
 
-https://my-gateway-{{SESSION_NAMESPACE}}.workshop.frankcarta.com/helloworld/api/returnFailure
+```execute
+echo https://my-gateway-$SESSION_NAMESPACE.workshop.frankcarta.com/helloworld/api/returnFailure
+```
 
 
 ## Scope-based Access Control: Scopes Filter

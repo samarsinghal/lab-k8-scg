@@ -76,9 +76,9 @@ kubectl apply -f demo/github-gateway-mapping.yaml
    
 After creating the mapping and route config resources, you should be able to access the app at the fully qualified domain name (FQDN) used by the Gateway instance and the path /api/*. For example, if your Gateway instance is exposed by an Ingress resource at the domain gateway.example.com, you can access the app at the following URL:
 
-
-https://my-gateway-{{SESSION_NAMESPACE}}.workshop.frankcarta.com/github
-
+```execute
+echo https://my-gateway-$SESSION_NAMESPACE.workshop.frankcarta.com/github
+```
 
 5. Using a browser go to gateway url you should see the github site. The request are 
    going to spring cloud gateway which is then sending them to github.com. 
@@ -149,14 +149,16 @@ $ kubectl apply -f demo/hellowworld-route-config.yaml
 $ kubectl apply -f demo/helloworld-gateway-mapping.yaml
 ```
 
-my-gateway had an ingress applied already for FQDN of my-gateway-{{SESSION_NAMESPACE}}.workshop.frankcarta.com, the helloworld API will be available under the path my-gateway-{{SESSION_NAMESPACE}}.workshop.frankcarta.com/helloworld/.... One of the endpoints available in the sample application is POST /api/messages which lists the posted message. 
+my-gateway had an ingress applied already for FQDN of my-gateway-$SESSION_NAMESPACE.workshop.frankcarta.com, the helloworld API will be available under the path my-gateway-$SESSION_NAMESPACE.workshop.frankcarta.com/helloworld/.... One of the endpoints available in the sample application is POST /api/messages which lists the posted message. 
 
-EX:- https://my-gateway-{{SESSION_NAMESPACE}}.workshop.frankcarta.com/helloworld/api/messages
+```execute
+echo https://my-gateway-$SESSION_NAMESPACE.workshop.frankcarta.com/helloworld/api/messages
+```
 
 ### Lets access service via gateway 
 
 ```execute
-curl -L -X POST "http://my-gateway-{{SESSION_NAMESPACE}}.workshop.frankcarta.com/helloworld/api/messages" -H 'Content-Type: application/json' -d '{ "sender": "world1" }'
+curl -L -X POST "http://my-gateway-$SESSION_NAMESPACE.workshop.frankcarta.com/helloworld/api/messages" -H 'Content-Type: application/json' -d '{ "sender": "world1" }'
 ```
 
 Output:
