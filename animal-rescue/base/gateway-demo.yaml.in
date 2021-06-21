@@ -5,7 +5,7 @@ metadata:
 spec:
   api:
     title: ${SESSION_NAMESPACE}-animal-rescue-gateway
-    # serverUrl: https://test-gateway.spring.animalrescue.online
+    serverUrl: http://${SESSION_NAMESPACE}-animal-rescue-gateway.workshop.frankcarta.com
   count: 2
   sso:
     secret: animal-rescue-sso
