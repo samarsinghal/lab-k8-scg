@@ -16,13 +16,14 @@ the application and use the login with Auth0 feature you will need a client secr
 kustomize build ./animal-rescue/ | kubectl apply -f -
 ```
 
-
 3. Check the animal rescue components that are deployed into the cluster using the command 
-   `kubectl get all -n animal-rescue` you should see output similar to the one below.
+   `kubectl get all` you should see output similar to the one below.
    
+``` execute
+kubectl get all
+```
+
 ```text
-2021-03-04 21:30:18 ⌚  asaikali-a01 in ~/workshops/tanzu-spring-cloud-gateway
-± |main S:14 U:1 ✗| → kubectl get all -n animal-rescue
 NAME                                          READY   STATUS    RESTARTS   AGE
 pod/animal-rescue-backend-74c54b577f-n7zxn    1/1     Running   0          6m54s
 pod/animal-rescue-frontend-76cf7899b9-s2pxz   1/1     Running   0          6m54s
@@ -61,7 +62,7 @@ statefulset.apps/gateway-demo   2/2     6m54s
 7. Using a browser visit `http://${SESSION_NAMESPACE}-animal-rescue-gateway.workshop.frankcarta.com/rescue` you will see the home page for the application. click around on the application and explore it.
 
 ``` execute
-echo ${SESSION_NAMESPACE}-animal-rescue-gateway.workshop.frankcarta.com/rescue
+echo http://${SESSION_NAMESPACE}-animal-rescue-gateway.workshop.frankcarta.com/rescue
 ```
 
 8. Click the login button in the top right corner, you will be redirected to Auth0 you can login
