@@ -1,10 +1,16 @@
 ## Configuring API portal for VMware Tanzu on Kubernetes
 
 
+We added the ingress for API portal
+
+``` execute
+kubectl get ingress -n api-portal
+```
+
 Check the APIs groups listed on the deployed API portal. A Swagger Petstore open API group is listed, but no API groups for the gateway are listed.
 
-```
-http://api-portal.workshop.frankcarta.com/apis
+``` execute
+echo http://api-portal.workshop.frankcarta.com/apis
 ```
 
 
@@ -16,13 +22,13 @@ To modify the OpenAPI source URL locations, edit deployment’s environment vari
 
 
 ``` execute
-kubectl set env deployment.apps/api-portal-server API_PORTAL_SOURCE_URLS="https://petstore.swagger.io/v2/swagger.json, https://petstore3.swagger.io/api/v3/openapi.json,http://scg-operator.spring-cloud-gateway/openapi" 
+kubectl set env deployment.apps/api-portal-server API_PORTAL_SOURCE_URLS="https://petstore.swagger.io/v2/swagger.json, https://petstore3.swagger.io/api/v3/openapi.json,http://scg-operator.spring-cloud-gateway/openapi" -n api-portal
 ```
 
 For any change in the API portal configuration, the service must be restarted.
 
 ``` execute
-kubectl rollout restart deployment api-portal-server
+kubectl rollout restart deployment api-portal-server -n api-portal
 ```
 
 Configure OpenAPI Source URLs Cache Time-to-live and Request Timeout
@@ -37,11 +43,11 @@ To improve performance and reduce traffic, API portal caches OpenAPI descriptors
 
 
 ``` execute
-kubectl set env deployment.apps/api-portal-server API_PORTAL_SOURCE_URLS_CACHE_TTL_SEC=120
+kubectl set env deployment.apps/api-portal-server API_PORTAL_SOURCE_URLS_CACHE_TTL_SEC=120 -n api-portal
 ```
 
 For any change in the API portal configuration, the service must be restarted.
 
 ``` execute
-kubectl rollout restart deployment api-portal-server
+kubectl rollout restart deployment api-portal-server -n api-portal
 ```

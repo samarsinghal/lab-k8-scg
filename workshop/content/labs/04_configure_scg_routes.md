@@ -77,7 +77,7 @@ kubectl apply -f demo/github-gateway-mapping.yaml
 After creating the mapping and route config resources, you should be able to access the app at the fully qualified domain name (FQDN) used by the Gateway instance and the path /api/*. For example, if your Gateway instance is exposed by an Ingress resource at the domain gateway.example.com, you can access the app at the following URL:
 
 ```execute
-echo https://$SESSION_NAMESPACE-gateway.workshop.frankcarta.com/github
+echo http://$SESSION_NAMESPACE-gateway.workshop.frankcarta.com/github
 ```
 
 5. Using a browser go to gateway url you should see the github site. The request are 
@@ -154,7 +154,7 @@ my-gateway had an ingress applied already for FQDN of my-gateway-$SESSION_NAMESP
 ### Lets access service via gateway 
 
 ```execute
-echo https://$SESSION_NAMESPACE-gateway.workshop.frankcarta.com/helloworld/api/Hello
+echo http://$SESSION_NAMESPACE-gateway.workshop.frankcarta.com/helloworld/api/Hello
 ```
 
 ```execute
