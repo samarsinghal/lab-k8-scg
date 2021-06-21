@@ -2,3 +2,6 @@ apiVersion: "tanzu.vmware.com/v1"
 kind: SpringCloudGateway
 metadata:
   name: ${SESSION_NAMESPACE}-gateway
+spec:
+  api: 
+    title: ${SESSION_NAMESPACE}-gateway

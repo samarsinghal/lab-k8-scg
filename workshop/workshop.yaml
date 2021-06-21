@@ -9,7 +9,7 @@ modules:
     - labs/03_configure_scg_instance
     - labs/04_configure_scg_routes
     - labs/05_predicates_and_filters
-    - labs/06_api_portal
-    - labs/07_configure_api_portal
-    - labs/08_animal-rescue
+    - labs/06_animal-rescue
+    - labs/07_api_portal
+    - labs/08_configure_api_portal
     - finish

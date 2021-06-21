@@ -4,7 +4,8 @@ metadata:
   name: gateway-demo
 spec:
   api:
-    serverUrl: https://test-gateway.spring.animalrescue.online
+    title: ${SESSION_NAMESPACE}-animal-rescue-gateway
+    # serverUrl: https://test-gateway.spring.animalrescue.online
   count: 2
   sso:
     secret: animal-rescue-sso

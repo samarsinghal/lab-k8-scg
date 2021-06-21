@@ -35,11 +35,11 @@ Introductions, Workshop, Logistics and Agenda Overview
 
 • Filters/Predicates
 
+• Animal rescue App
+
 • API Portal 
 
 • Configure/On-Boarding API to API portal
-
-• Animal rescue App
 
 <br/> 
 
