@@ -9,3 +9,8 @@ spec:
   count: 2
   sso:
     secret: animal-rescue-sso
+  cors:
+    allowedOrigins: 
+      - "*"
+    allowedMethods:
+      - "*"
