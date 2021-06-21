@@ -5,12 +5,12 @@ metadata:
 spec:
   api:
     title: ${SESSION_NAMESPACE}-animal-rescue-gateway
-    serverUrl: https://${SESSION_NAMESPACE}-animal-rescue-gateway.workshop.frankcarta.com
+    serverUrl: http://${SESSION_NAMESPACE}-animal-rescue-gateway.workshop.frankcarta.com
+    cors:
+      allowedOrigins: 
+        - "http://${SESSION_NAMESPACE}-animal-rescue-gateway.workshop.frankcarta.com"
+      allowedMethods:
+        - "GET"
   count: 2
   sso:
     secret: animal-rescue-sso
-  cors:
-    allowedOrigins: 
-      - "*"
-    allowedMethods:
-      - "*"
