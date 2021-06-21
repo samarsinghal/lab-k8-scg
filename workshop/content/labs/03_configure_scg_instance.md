@@ -96,7 +96,7 @@ You can configure Spring Cloud Gateway for Kubernetes to run multiple instances 
 While a Gateway is running you can use kubectl scale to modify the number of replicas. For example, given a Gateway that has 1 replica, the following will increase the number of replicas to 2.
 
 ```
-kubectl scale scg my-gateway --replicas=2
+kubectl scale scg ${SESSION_NAMESPACE}-gateway --replicas=2
 ```
 
 In initial configuration, you can specify the number of replicas using the spec.count parameter. The following example configures a replica count of 3.
@@ -104,9 +104,7 @@ In initial configuration, you can specify the number of replicas using the spec.
 apiVersion: "tanzu.vmware.com/v1"
 kind: SpringCloudGateway
 metadata:
-  name: my-gateway
-spec:
-  count: 3
+  name: ${SESSION_NAMESPACE}-gateway
 
 So long as no other changes are introduced in the descriptor, you can safely modify spec.count and re-apply to increase or decrease the number of replicas.
 
@@ -166,7 +164,7 @@ This does not modify any authorization server token expiration (or ttl) configur
 Similarly to other Kubernetes resources, you can optionally define the required memory (RAM) and CPU for a Gateway under spec.resources.
 
 ```execute
-kubectl get statefulset my-gateway -o yaml 
+kubectl get statefulset ${SESSION_NAMESPACE}-gateway -o yaml 
 ```
 
 By default each instance is initialized with:

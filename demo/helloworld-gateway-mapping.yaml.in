@@ -4,6 +4,6 @@ metadata:
   name: helloworld-gateway-mapping
 spec:
   gatewayRef:
-    name: my-gateway
+    name: ${SESSION_NAMESPACE}-gateway
   routeConfigRef:
     name: helloworld-route-config

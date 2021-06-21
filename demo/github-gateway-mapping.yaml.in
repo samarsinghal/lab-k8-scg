@@ -4,6 +4,6 @@ metadata:
   name: github-gateway-mapping
 spec:
   gatewayRef:
-    name: my-gateway
+    name: ${SESSION_NAMESPACE}-gateway
   routeConfigRef:
     name: github-route-config

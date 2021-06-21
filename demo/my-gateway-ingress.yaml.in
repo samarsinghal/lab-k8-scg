@@ -4,15 +4,15 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: contour
   generation: 1
-  name: my-gateway-${SESSION_NAMESPACE}-ingress
+  name: ${SESSION_NAMESPACE}-gateway-ingress
   namespace: ${SESSION_NAMESPACE}
 spec:
   rules:
-  - host: my-gateway-${SESSION_NAMESPACE}.workshop.frankcarta.com
+  - host: ${SESSION_NAMESPACE}-gateway.workshop.frankcarta.com
     http:
       paths:
       - backend:
-          serviceName: my-gateway
+          serviceName: ${SESSION_NAMESPACE}-gateway
           servicePort: 80
         path: /
         pathType: ImplementationSpecific
