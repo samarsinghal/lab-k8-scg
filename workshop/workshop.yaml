@@ -11,4 +11,5 @@ modules:
     - labs/05_predicates_and_filters
     - labs/06_api_portal
     - labs/07_configure_api_portal
+    - labs/08_animal-rescue
     - finish

@@ -1,6 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: animal-rescue
+# namespace: animal-rescue
 
 secretGenerator:
 - name: animal-rescue-sso

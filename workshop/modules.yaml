@@ -18,6 +18,8 @@ modules:
         name: API Portal
     labs/07_configure_api_portal:
         name: Configure Api Portal
+    labs/08_animal-rescue:
+        name: Deploy Animal Rescue App
     finish:
         name: Workshop Summary
         exit_sign: Finish Workshop

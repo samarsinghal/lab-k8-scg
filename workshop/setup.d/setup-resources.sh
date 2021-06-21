@@ -6,4 +6,5 @@ envsubst < demo/helloworld-gateway-mapping.yaml.in > demo/helloworld-gateway-map
 envsubst < demo/github-gateway-mapping.yaml.in > demo/github-gateway-mapping.yaml
 envsubst < demo/github-route-config.yaml.in > demo/github-route-config.yaml
 envsubst < demo/github-ratelimit-route-config.yaml.in > demo/github-ratelimit-route-config.yaml
+envsubst < animal-rescue/base/gateway-demo-ingress.yaml.in > animal-rescue/base/gateway-demo-ingress.yaml
 

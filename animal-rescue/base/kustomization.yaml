@@ -1,6 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: animal-rescue
+# namespace: animal-rescue
 
 secretGenerator:
 - name: sso-credentials
@@ -12,11 +12,12 @@ generatorOptions:
   disableNameSuffixHash: true
 
 resources:
-  - namespace.yaml
+  # - namespace.yaml
   - animal-rescue-frontend.yaml
   - animal-rescue-frontend-mapping.yaml
   - animal-rescue-frontend-route-config.yaml
   - animal-rescue-backend.yaml
   - animal-rescue-backend-mapping.yaml
   - animal-rescue-backend-route-config.yaml
+  - gateway-demo-ingress.yaml
   - gateway-demo.yaml
