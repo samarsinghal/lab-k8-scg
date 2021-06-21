@@ -9,4 +9,8 @@ spec:
         - Path=/github/**
       filters:
         - StripPrefix=1
-        - RateLimit=2,1m
+    - uri: https://httpbin.org
+      predicates:
+        - Path=/${SESSION_NAMESPACE}-httpbin/**
+      filters:
+        - StripPrefix=1
